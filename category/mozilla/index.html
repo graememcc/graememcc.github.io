@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>@graememcc</title>
+	<atom:link href="http://www.graememcc.co.uk/category/mozilla/feed" rel="self" type="application/rss+xml" />
+	<link>http://www.graememcc.co.uk</link>
+	<description>Graeme McCutcheon's mozilla feed</description>
+	<lastBuildDate>Sun, 07 Jun 2015 21:00:46 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	
+	<item>
+		<title>On funkierJS... and other, more serious matters</title>
+		<link>http://www.graememcc.co.uk/onfunkier.html</link>
+		<pubDate>Sun, 07 Jun 2015 20:50:00 +0000</pubDate>
+		<dc:creator><![CDATA[Graeme McCutcheon]]></dc:creator>
+				<category><![CDATA[Resources]]></category>
+		<category><![CDATA[email]]></category>
+
+		<guid isPermaLink="false">http://www.graememcc.co.uk/onfunkier.html</guid>
+		<description><![CDATA[
+<p>In which our hero builds a Javascript library and makes a shocking confession.</p>
+]]></description>
+				<content:encoded><![CDATA[
+<p class="update">
+Note: this is a temporary static site. The full site will be restored once I get some domain hosting issued resolved.
+</p> 
+
+<p>I occasionally flirt with functional programming. Well to tell you the truth, its more of a vague attempt to repent for a misspent youth. After all, I studied at Glasgow: a university that happens to know a thing or two about putting a Haskell compiler together. It is to my eternal shame that I took just one course in functional programming, albeit supplemented by a later reacquaintance in a project involving SECD machines and <em>(shudders)</em> Java.</p>
+
+<p>In recent years, the Javascript world has belatedly caught up to Mr Eich's incredible foresight in designing a language with first-class functions. Hey, we can—to an extent—program functionally too! Libraries like Underscore and LoDash have enjoyed a meteoric rise. However, as has been <a href="https://www.youtube.com/watch?v=m3svKOdZijA">noted</a> by wiser heads than I,  their APIs make composability harder due to the positioning of parameters. The preponderance of optional parameters and different signatures worries me too. Other libraries go some way to fixing that, but add currying and partial application as an afterthought, and frequently don't provide as full an API as Underscore and co., leaving you with an awful lot of scaffolding to build up before you can do anything useful.</p>
+
+<p>This has left me reinventing some functional wheels once too often. But if there's one thing our Nodefathers have taught us, it's that the world can always use another Javascript library. So, with a certain inevitability, enter stage left <a href="https://graememcc.github.io/funkierJS">funkierJS</a>.</p>
+
+<p>funkierJS offers some features that I've felt are lacking elsewhere. First and foremost: currying and partial application are front and centre. In all the libraries I've seen, it's up you to curry functions as you need to—funkierJS's API functions are curried from the start, allowing you to quickly build useful partially applied functions. Whenever you hand funkierJS a function, you're going to get a curried function back. Further, most expositions of currying in Javascript, if followed, will quickly lead to death by a thousand parentheses, turning a call of some 3-argument function f in to the tedious <code>f(1)(2)(3)</code>. funkierJS provides what I call <em>pragmatic curried functions</em>. Only have 1 argument? Sure, I'll take it. But if you have more, then funkierJS's curried functions will take them and do the right thing. That earlier call could now be any of <code>f(1)(2)(3), f(1, 2)(3), f(1)(2, 3), f(1, 2, 3)</code>.</p>
+
+<p>funkierJS's curried functions accept that they don't exist in a pure mathematical paradise, and we live in a real world, full of grubby state. funkierJS provides various options for allowing your functions to handle state: the <code>curry</code> function will always call the underlying function with <code>this</code> set to <code>null</code>, a clear declaration that your function cares not for the state of the outside world. Sometimes you need to tiptoe onto the slippery slope: the <code>bind</code> currying method takes an object with your function. The resulting function has its <code>this</code> context forever fixed to the supplied object.</p>
+
+<p>Sometimes you just need to go full JS. In a feature I believe to be unique to funkierJS, one can use a method I've christened "object-currying". This currying mechanism is designed for currying methods on object prototypes: each time you invoke an object curried method on a particular method, the execution context for the partial applications will be dynamically bound to the object that the method was invoked on. See the following (artificial) example:</p>
+<pre><code>
+  function F(x) { this.x = x; }
+
+  F.prototype = { foo: funkierJS.objectCurry(function(y, z) { return this.x + y + z; }) }
+
+  var obj1 = new F(1);
+  var obj2 = new F(10);
+
+  var partial1 = obj1.foo(2);
+  var partial2 = obj2.foo(2);
+
+  partial1(3); // 6 i.e. 1 + 2 + 3
+  partial2(3); // 15 i.e. 10 + 2 + 3
+</code></pre>
+
+<p>The partial applications <code>partial1</code> and <code>partial2</code> automatically pick up the correct execution context, turning the object into a factory for partially applied functions. In fact, objectCurry can even be used to curry constructors invoked with <code>new</code> (though <code>instanceof</code> will report false for the partial applications created along the way).</p>
+
+<p>Another frustration I encounter with other functional libraries is that, while they provide the basics, they still leave you too much work before they can prove really useful. funkierJS relieves the burden by providing curried implementations of most of the ES5 API (not just the functional-oriented parts): the functions you need should be there, ready to go without you having to put in the effort. While implementing this, I took the opportunity to smooth out the sharper edges - functions in the standard with optional parameters become different functions with different signatures (boy, was the plethora of Date constructors fun!). Anyone who has ever passed <code>parseInt</code> to Javascript's native array map won't be bitten by the same problem here.</p>
+
+<p>Of course, adding all these functions made the API somewhat, er, plump. So many functions! To ease the pain somewhat, funkierJS has a built-in help function: pass it another funkierJS function, and you can get help right there in your REPL or web console, without having to pause to google API docs.</p>
+
+<p>So, that is the essence of funkierJS. I think it is now ready for an initial release, although there are a couple of missing pieces—more below—and this initial release has concentrated on functionality not performance. Install it from npm, or visit the <a href="https://graememcc.github.io/funkierJS">website</a>.</p>
+
+<h2>Caveat emptor</h2>
+
+<p>There is one major problem going forward. I should warn you that having now released this, I'm going to be unresponsive to issues and pull requests. You see, my light tone in the paragraphs above has been an exercise in burying the lede. There's a problem.</p>
+
+<p>Come Tuesday, June 9th, <strong>I will be homeless.</strong></p>
+
+<p>I don't want to dally too much on the reasons, though I'd quickly point out there's no addiction issues or anything of that nature at play. Just the nexus of economic misfortune, and my own beligerence and pride. The pride, at least, is certainly about to be offset with a grim lesson in humility.</p>
+
+<p>We're not talking shacking up in a cheap hotel, or camping on friend's sofas, there's no happy endings ahead. I don't even have a car to camp in. This is full on, worst case scenario, life on the streets. It's somewhat surreal: today I sit here blogging, with access to food, drink, and even the frothiness of Twitter. In 48 hours, I won't even have shelter.</p>
+
+<p>You'll forgive me then, I hope, that funkierJS is not quite as complete as I'd like, and you'll perhaps accept I'm about to go in to absent maintainer mode. I'm sorry. However, I hope you'll accept it as part of the legacy I leave behind of my time on the internet. It's not been a bad run: <a href="https://graememcc.github.io/micropolisJS">micropolisJS</a> was, in retro-city simulator circles, a minor hit. My Mozilla contributions, though rarely high-profile, I hope improved the quality-of-life of Mozilla developers and end-users alike: from a mad idea that became a <a href="https://github.com/mozilla/bugherder">webapp</a> now considered a fairly critical part of Mozilla's internal workflow, to little details like the server-side hooks that print out a handy link for pasting into bugs, to fixing at-the-time <a href="http://weblogs.mozillazine.org/bz/archives/2008/10/fixing_scroll_restoration_on_n.html">10 year old bugs that bedevilled Mozilla luminaries</a>, to find-in-page, to the unloved Editor code...they will endure during my enforced absence. I'm howling with rage at the mandatory opportunity cost being imposed. I had started on a clean-sheet reimplementation of <a href="https://github.com/graememcc/v8monkey">V8Monkey</a> that I now won't get to see through. Instead, I enter a world where Mozilla summits, pull requests, bugs, and even most components of ordinary life will be totally alien and far removed from my ongoing experiences. And, I am very, very frightened.</p>
+
+<p>Hopefully I'll make it back in one piece. Look after the Web while I'm gone. I believe in the transformative power of technology, and the web in particular, although I rue that I didn't manage to transform my own life with it. There is a <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GPU2AKWAYSNAL" target="_blank">Paypal donation link</a> if you're willing to help towards my survival out there, although after Tuesday it's unlikely that I'll be able to access Paypal, or indeed anything else. Perhaps things might turn around, and I'll see you someday at some tech event, and be able to tell you I survived. I'd sure like that.</p>
+
+<p><em>Au revoir.</em></p>
+]]></content:encoded>
+		</item>
+	</channel>
+</rss>

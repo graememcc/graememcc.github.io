@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'Chunk';
+  font-style: normal;
+  font-weight: 400;
+  src: local('ChunkFive'), url(chunk.woff) format('woff');
+}
+
+.chunk {
+  font-family: 'Chunk', serif;
+  font-weight: normal;
+}
+
+.micropolis {
+  background-color: darkslategray;
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255, 255, 255, 0.2) 35px, rgba(255, 255, 255, 0.2) 70px);
+  font-family: 'Chunk', serif;
+  height: 50px;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+a.logo, a:active, a:hover.logo, a:visited.logo {
+  text-decoration: none;
+}
+
+.funkier {
+  color: #2f4f4f;
+  background-color: #eee;
+  font-family: 'Chunk', serif;
+  height: 50px;
+  text-align: center;
+  padding: 10px;
+}
+
+.v8monkey {
+  color: rebeccapurple;
+  font-family: 'Chunk', serif;
+  height: 50px;
+  text-align: center;
+  padding: 10px;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Projects | @graememcc | Graeme McCutcheon&#039;s corner of the web</title>
+<link rel='stylesheet' id='syntax-style-css'  href='../css/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='syntax-style-css'  href='../css/projects.css' type='text/css' media='all' />
+<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="home page page-id-20 page-template-default custom-background">
+  <div id="page" class="hfeed site">
+    <header id="masthead" class="site-header" role="banner">
+      <div class="site-header-wrapper clear">
+        <div class="site-branding">
+          <h1 class="site-title"><a href="http://www.graememcc.co.uk/" title="@graememcc" rel="home">@graememcc</a></h1>
+<!--<h2 class="site-description">Graeme McCutcheon&#039;s corner of the web</h2>-->
+        </div>
+      </div>
+      <nav id="mynav">
+        <div class="site-header-wrapper align-right">
+        <ul>
+          <li><a href="https://github.com/graememcc/" target="_blank">Github</a></li>
+          <li><a href="http://www.graememcc.co.uk/projects/">Projects</a></li>
+          <li><a href="http://www.graememcc.co.uk/blog/">Blog</a></li>
+          <li><a href="http://www.graememcc.co.uk/">Home</a></li>
+        </ul>
+      </div>
+      </nav>
+    </header><!-- #masthead -->
+  <div id="main" class="site-main">
+    <div id="primary" class="content-area">
+      <div id="content" class="site-content" role="main">
+        <article id="post-20" class="post-20 page type-page status-publish hentry">
+          <header class="entry-header">
+          <h1 class="entry-title">Projects</h1> </header><!-- .entry-header -->
+          <p>
+           As well as my general Mozilla contributions, I have created several other projects. You can find details of them below.
+          </p>
+          <section>
+            <a class="logo" href="http://graememcc.github.io/micropolisJS" target="_blank"><h2 class="micropolis chunk">micropolisJS</h2></a>
+            <p><a href="http://graememcc.github.io/micropolisJS" target="_blank">micropolisJS</a> is a port of the original <cite>SimCity</cite> to Javascript/HTML5. It is based on Don Hopkins'
+            <a href="https://github.com/simhacker/micropolis" target="_blank"><cite>Micropolis</cite></a>, which is the open-source release of the <cite>SimCity</cite> code for the One Laptop Per Child project. I had several learning outcomes in mind: to gain some experience with the HTML canvas element, to understand how HTML5 games are programmed, and to peek behind the curtain, and understand how a favourite game from my childhood actually worked under the hood.
+            </p>
+          </section>
+          <section>
+            <a class="logo" href="http://www.graememcc.co.uk/funkierjs" target="_blank"><h2 class="funkier chunk">funkierJS</h2></a>
+            <p>I describe <a href="http://www.graememcc.co.uk/funkierjs" target="_blank">funkierJS</a> as a <q>pragmatic functional toolbox</q> for ES5. It offers a wide variety of functional programming primitives, for example <code>map</code>, and <code>foldr</code>, with the same API as Haskell, leading to improved function composability over other functional libraries such as <code>underscore</code> or <code>lodash</code>. Further, all the functions are <q>pragmatically curried</q>, in that one can supply any number of arguments; if the number of arguments provided are less than the number required, then the function will be partially applied.</p>
+            <p>
+            Most importantly, funkierJS provides curried implementations of virtually the entire Ecmascript 5 standard library, allowing the user to be productive immediately, rather than having to manually create curried versions of common functions. In doing so, it also takes the opportunity to smooth out some rough edges of the library API. In particular, by virtue of currying, there are no functions with optional arguments: the versions with optional arguments become separate functions instead, hopefully eliminating a whole class of common errors.
+            </p>
+            <p>
+            Finally, funkierJS offers the unique innovation of "object-curried methods", which provides a mechanism for object methods that are in some sense "self-currying"; they behave like normal curried functions, but pick up their <code>this</code> context from the first invocation in the partial-application sequence.
+            </p>
+          </section>
+          <section>
+            <a class="logo" href="https://github.com/graememcc/v8monkey" target="_blank"><h2 class="v8monkey chunk">v8monkey</h2></a>
+            <p>Currently in progress, <a href="https://github.com/graememcc/v8monkey" target="_blank">V8Monkey</a> is a clean-sheet reimplementation of an idea originally conceived by <a href="http://zpao.com/posts/about-that-hybrid-v8monkey-engine/">Paul O'Shannesy</a> to build a V8 API adapter for Mozilla's Javascript engine, <cite>SpiderMonkey</cite>. Once implemented, this should then enable running <cite>nodeJS</cite> with SpiderMonkey as the underlying Javascript engine.
+            </p>
+           </section>
+          </div><!-- .entry-content -->
+        </article><!-- #post-## -->
+      </div><!-- #content -->
+    </div><!-- #primary -->
+  </div><!-- #main -->
+  <footer id="colophon" class="site-footer" role="contentinfo">
+  </footer><!-- #colophon -->
+  </div><!-- #page -->
+  <link rel='stylesheet' id='custom-css'  href='../css/custom.css' type='text/css' media='all' />
+</html>
+

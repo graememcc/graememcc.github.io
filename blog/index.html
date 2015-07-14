@@ -36,6 +36,25 @@
                           visible. Normal service will be resumed as soon as possible.</aside>
         <article class="post-20 page type-page status-publish hentry">
           <header class="entry-header">
+            <a href="http://www.graememcc.co.uk/2012/06/12/introducing-m-cmerge"><h2>Introducing m-cMerge</h2></a>
+          </header>
+          <div class="entry-content">
+  <p>
+  Those of you who hack on Gecko code will know that when changing an XPCOM interface, you need to update the IID. Now, in the dim fog of morning, when I haven't drunk enough coffee, how on earth am I supposed to remember that the command-line utility for <strong>UUID GEN</strong>eration is named <code>uuidgen</code>? I wish these things had useful mnemonics!
+  </p>
+  <p>
+  Yes, I could pop in to irc.mozilla.org, and ask firebot. However, I would inevitably forget to /msg firebot, and it is well known that #developers is a hotbed of nefarious sorts, lying in wait to snatch your newly-minted IID and ride off into the sunset, cackling with glee. I could navigate to one of the many online tools, but, sheesh, that sure sounds like a lot of work, you know?
+  </p>
+  <p>
+  <code>mach</code> to the rescue. I've landed a <code>mach uuid</code> command, which will furnish you with a UUID in canonical form. Alternatively, use <code>mach uuid -f cpp</code> for the C++ form.
+  </p>
+  <p>
+  Happy IID revving!
+  </p>
+          </div>
+         </article>
+        <article class="post-20 page type-page status-publish hentry">
+          <header class="entry-header">
             <a href="http://www.graememcc.co.uk/2012/12/10/five-years"><h2>Five years</h2></a>
           </header>
           <div class="entry-content">

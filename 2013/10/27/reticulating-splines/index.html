@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Reticulating splines | @graememcc | Graeme McCutcheon&#039;s corner of the web</title>
+<link rel="alternate" type="application/rss+xml" title="@graememcc &raquo; Feed" href="http://www.graememcc.co.uk/feed/" />
+<link rel='stylesheet' id='syntax-style-css'  href='../../../../css/style.css' type='text/css' media='all' />
+<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="home page page-id-20 page-template-default custom-background">
+  <div id="page" class="hfeed site">
+    <header id="masthead" class="site-header" role="banner">
+      <div class="site-header-wrapper clear">
+        <div class="site-branding">
+          <h1 class="site-title"><a href="http://www.graememcc.co.uk/" title="@graememcc" rel="home">@graememcc</a></h1>
+<!--<h2 class="site-description">Graeme McCutcheon&#039;s corner of the web</h2>-->
+        </div>
+      </div>
+      <nav id="mynav">
+        <div class="site-header-wrapper align-right">
+        <ul>
+          <li><a href="https://github.com/graememcc/" target="_blank">Github</a></li>
+          <li><a href="http://www.graememcc.co.uk/projects/">Projects</a></li>
+          <li><a href="http://www.graememcc.co.uk/blog/">Blog</a></li>
+          <li><a href="http://www.graememcc.co.uk/">Home</a></li>
+        </ul>
+      </div>
+      </nav>
+    </header><!-- #masthead -->
+  <div id="main" class="site-main">
+    <div id="primary" class="content-area">
+      <div id="content" class="site-content" role="main">
+        <article id="post-20" class="post-20 page type-page status-publish hentry">
+          <header class="entry-header">
+            <h1 class="entry-title">Reticulating splines</h1> </header><!-- .entry-header -->
+          <div class="entry-content">
+            <aside class="update">Note: for technical reasons, this is currently a (temporary) static copy of my blog. Comments are disabled, and existing comments are not
+                              visible. Normal service will be resumed as soon as possible.</aside>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2013/10/micropolis.png"><img class="size-full wp-image-286" alt="Building cities like it's 1990" src="http://www.graememcc.co.uk/wp-content/uploads/2013/10/micropolis.png" width="361" height="233" /></a>
+  <figcaption><span style="text-decoration: line-through;">Partying like it's 1999</span>  Building cities like it's 1990</figcaption>
+</figure>
+<p>
+It started with the release of the new SimCity earlier this year. Sadly, I was only spectator: I doubted my machine could handle it - it's even starting to creak a bit when compiling Firefox (sad times). I settled for digging out my copy of SC4 and moving on. It continued with the growing drumbeat around the <a href="http://www.mozilla.org/en-US/firefox/os/">Web as the platform</a>, including as a viable gaming platform. Another element was introduced when I read about a former Mozilla employee's work on <a href="http://vizicities.com/">ViziCities</a>. What happens when these swirl about in my head for a while?
+</p>
+<a name="more"></a>
+<h2>micropolisJS</h2>
+<p>
+I'd wanted to play with canvas and games on the Web for a while, but struggled for ideas. I ain't no game designer. I enrolled in the Udacity HTML5 game course, but it proved disappointing: instead of teaching HTML5 game development, it had learners fill in the blanks to complete an already-implemented game. Meanwhile, my simulation itch still hadn't been fully scratched. Then I discovered <a href="http://code.google.com/p/micropolis">Micropolis</a>.
+</p>
+<p>
+In 2007, the source code for EA's original city simulator was released, following an appeal by <a href="http://laptop.org">One Laptop Per Child</a> for games. (Specifically, <a href="http://www.donhopkins.com">Don Hopkins'</a> UNIX port was released. Now, here was something I could work with. If we can run Unreal Engine on the web, then an elderly game shouldn't be out of reach. By eschewing the Emscripten route, I could have a peek behind the curtain, and see how the simulation works.
+</p>
+<p>
+So, <a href="http://graememcc.github.io/micropolisjs">micropolisJS</a> was born, built using HTML5 canvas and JS. There are more than a few rough edges, but it's shaping up. There are a few missing features: loading/saving, sound, scenarios, graphs, overlays, and choosing the game level to name a few. The frame rate isn't quite where I'd expect it to be.
+</p>
+<h2>Where next?</h2>
+<p>
+Although it's an interesting artefact itself, I'm more interested in where we can take it beyond basic functionality. Games on the web don't need to be like games elsewhere. Don gave a talk at Hacking At Random 2009 where he <a href="http://micropolisonline.com/static/documentation/HAR2009Transcript.html">outlined his aspirations</a> for the game, particularly with regards to education. I think we can really deliver on some of these, using the power of the modern web, for example leveraging <a href="https://togetherjs.com">Together.js</a> for collabarative play. We can definitely make it more moddable: the painting code already supports switching to a different tile set (if anyone has the patience to put one together) although there' currently no UI to support this. I'd like users to have the ability to define their own zones and see how it affects the simulation. Perhaps you want to add a windfarm, or a shopping mall. The simulation offers learning opportunites, and learning outcomes certainly deserve to be rewarded with <a href="http://openbadges.org">Open Badges</a>.</p>
+</p>
+<p>
+The code is available on <a href="https://github.com/graememcc/micropolisJS">GitHub</a>. Patches welcome! (Doubly so if you're better at web design than I am. Which you are - I suck at CSS). You can help <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=TV83GP5CJGL3Q&lc=GB&item_name=micropolisJS&no_note=1&no_shipping=1&currency_code=GBP&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">support micropolisJS</a>, and help me continue to develop it, though you should donate to OLPC too: without that project, the original code wouldn't have been available for me to adapt. Most of all, I want your ideas and bug reports!
+</p>
+<p>
+<a href="http://graememcc.github.io/micropolisjs">http://graememcc.github.io/micropolisjs</a>
+</p>
+          </div><!-- .entry-content -->
+        </article><!-- #post-## -->
+      </div><!-- #content -->
+    </div><!-- #primary -->
+  </div><!-- #main -->
+  <footer id="colophon" class="site-footer" role="contentinfo">
+  </footer><!-- #colophon -->
+  </div><!-- #page -->
+  <link rel='stylesheet' id='custom-css'  href='../../../../css/custom.css' type='text/css' media='all' />
+</html>

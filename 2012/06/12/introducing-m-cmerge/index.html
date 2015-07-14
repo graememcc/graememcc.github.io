@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Introducing m-cMerge | @graememcc | Graeme McCutcheon&#039;s corner of the web</title>
+<link rel="alternate" type="application/rss+xml" title="@graememcc &raquo; Feed" href="http://www.graememcc.co.uk/feed/" />
+<link rel='stylesheet' id='syntax-style-css'  href='../../../../css/style.css' type='text/css' media='all' />
+<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="home page page-id-20 page-template-default custom-background">
+  <div id="page" class="hfeed site">
+    <header id="masthead" class="site-header" role="banner">
+      <div class="site-header-wrapper clear">
+        <div class="site-branding">
+          <h1 class="site-title"><a href="http://www.graememcc.co.uk/" title="@graememcc" rel="home">@graememcc</a></h1>
+<!--<h2 class="site-description">Graeme McCutcheon&#039;s corner of the web</h2>-->
+        </div>
+      </div>
+      <nav id="mynav">
+        <div class="site-header-wrapper align-right">
+        <ul>
+          <li><a href="https://github.com/graememcc/" target="_blank">Github</a></li>
+          <li><a href="http://www.graememcc.co.uk/projects/">Projects</a></li>
+          <li><a href="http://www.graememcc.co.uk/blog/">Blog</a></li>
+          <li><a href="http://www.graememcc.co.uk/">Home</a></li>
+        </ul>
+      </div>
+      </nav>
+    </header><!-- #masthead -->
+  <div id="main" class="site-main">
+    <div id="primary" class="content-area">
+      <div id="content" class="site-content" role="main">
+        <article id="post-20" class="post-20 page type-page status-publish hentry">
+          <header class="entry-header">
+            <h1 class="entry-title">Introducing m-cMerge</h1> </header><!-- .entry-header -->
+          <div class="entry-content">
+            <aside class="update">Note: for technical reasons, this is currently a (temporary) static copy of my blog. Comments are disabled, and existing comments are not
+                              visible. Normal service will be resumed as soon as possible.</aside>
+<p>
+In the summer of 2011, the integration branch mozilla-inbound was created, to allow Mozilla contributors to land patches without having to wait multiple hours afterwards waiting for your builds to complete. A team of inbound-sheriffs monitor the tree, dealing with failures and backing out where appropriate. About once a day, one of the sheriffs would merge the changes to mozilla-central, and after the merge spend the next 90 minutes marking the bugs as resolved and pasting the pushlog URLs into each bug's comments. And thus your patch made it to mozilla-central!
+</p>
+<p>
+Wait a minute, after the merge the sheriffs did what?!?
+</p>
+<p>
+We have some smart people acting as inbound sheriffs. This does not seem like the best use of their time. It always bugged me, even though I've never merged myself. I wanted to do something about it. However, I felt it would be difficult to fully automate - even with our current restrictions, a wide variety of commit messages is possible. Accurately parsing them 100% of the time would be...hard. Throw in security bugs, and inbound's propensity to get so hosed that it has to be closed for a bit of "BACK OUT ALL THE THINGS!"...
+</p>
+<p>
+That said, I didn't think all was lost. As Kernighan and Plauger said, most users will be willing to meet you halfway, and be ecstatic if you manage 90% of the work.  I decided to see if we could get 90% of the way there.
+</p>
+<p>
+<a name="more"></a>
+<h2>m-cMerge</h2>
+m-cMerge is the fruit of that labour. It lives at <a title="http://www.graememcc.co.uk/m-cmerge/" href="http://www.graememcc.co.uk/m-cmerge/" target="_blank">https://paas.allizom.org/bugherder/</a>, with the source available at <a title="https://bitbucket.org/graememcc/m-cmerge" href="https://bitbucket.org/graememcc/m-cmerge" target="_blank">https://bitbucket.org/graememcc/m-cmerge</a>. Designed to be used immediately following a merge to mozilla-central, it will load the specified pushlog, and attempt to work out what fixes made it, what got backed out, and separate out merge changesets, no-bug changesets and other noise. One can then manually review, correct any misdetections, and hit submit to have the relevant changes made to Bugzilla.
+</p>
+<p>
+To begin, enter the changeset hash of the merge:
+</p>
+<p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/06/Screenshot-10.png"><img class=" wp-image-72 " title="Screenshot-10" src="http://www.graememcc.co.uk/wp-content/uploads/2012/06/Screenshot-10.png" alt="" width="461" height="141" /></a>
+  <figcaption>First, enter the relevant changeset</figcaption>
+</figure>
+<p>
+m-cMerge gets busy, loading the pushlog, categorising the changesets, and loading the relevant bug data. The results will be split into 5 categories:
+</p>
+<ul>
+ 	<li>Fixes (pushes that stuck!)</li>
+ 	<li>Pushes backed out</li>
+ 	<li>Backouts of things not in this merge</li>
+ 	<li>Merge changesets</li>
+ 	<li>Other changesets</li>
+</ul>
+<p>
+If a particular merge does not contain any pushes of a particular type, it will be omitted.
+</p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/06/mcMerge1.png"><img class=" wp-image-87   " title="mcMerge1" src="http://www.graememcc.co.uk/wp-content/uploads/2012/06/mcMerge1-300x198.png" alt="" width="168" height="111" /></a>
+  <figcaption>Pushes are categorised into one of five categories</figcaption>
+</figure>
+<p>
+The text at the top calls out various special cases, for example bugs with "leave open" in the whiteboard (which default to comment without resolving), and security bugs. Note that you cannot resolve or comment in security bugs in m-cMerge - I feel those are best altered by human hands. Underneath, you will find the relevant pushes, ordered from newest first, to mirror the pushlog, with any bugs that m-cMerge believes should be commented immediately below.
+</p>
+<p>
+Most of the controls should hopefully be self-explanatory. If the "Comment:" checkbox is checked, a comment will be posted in the bug. If the "Resolve:"  flag is checked, the bug will be marked as RESOLVED FIXED. Additionally, when resolving, one can change the target milestone, by selecting from the drop-down menu. Where possible, m-cMerge will suggest a sensible value for the target milestone. You cannot set the target milestone when only commenting; if the bug is not being resolved at this point, I do not believe you can make any claims about the milestone.
+</p>
+<h2>Comments</h2>
+<p>
+Click "View/hide comment" to view the suggested comment for a particular changeset, and verify it is correct. You can amend the comment as necessary.
+</p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/06/Screenshot-15.png"><img class="size-medium wp-image-89" title="Screenshot from 2012-08-02 17:03:39" src="http://www.graememcc.co.uk/wp-content/uploads/2012/06/Screenshot-from-2012-08-02-170339-300x51.png" alt="" width="300" height="51" /></a>
+  <figcaption>Clicking view/hide shows a textarea which allows you to edit the comment</figcaption>
+</figure>
+<p>
+If there are a series of changesets all associated with the same bug, i.e. you have pushes of the form "Bug XXX - Part 1: fix something", "Bug XXX - Part 2: fix something else" and so on, the comments will be merged into a single comment on submission, with the comment for the oldest changeset first.
+</p>
+<p>
+The comment checkbox works on a per changeset basis: if you have 3 changesets associated with one bug, and deselect the comment option on one changeset, the other two will still be commented unless you instruct otherwise. In contrast, the resolve checkbox works on a per-bug basis, affecting all instances of that bug.
+</p>
+<h2>Mis-detected bugs</h2>
+Only 90% of the way, remember? Due to the wide variety of commit messages, m-cMerge will sometimes get it wrong, particularly when a commit message references multiple bugs. Next to each bug are "remove" and "change" buttons, to allow you to disassociate a bug, or correct which bug will be resolved.
+</p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/06/mcMerge3.png"><img class="size-medium wp-image-90" title="mcMerge3" src="http://www.graememcc.co.uk/wp-content/uploads/2012/06/mcMerge3-300x114.png" alt="" width="300" height="114" /></a>
+  <figcaption>Not m-cMerge's fault (for once!). Should have been 763238. Hit the "change" button!</figcaption>
+</figure>
+<p>
+Additionally, the "add bug" button, does the obvious thing, allowing you to send a comment about a particular changeset to multiple bugs.
+</p>
+<h2>Submitting</h2>
+<p>
+When you've reviewed all the changes, scroll to the bottom to find your friendly neighbourhood "submit" button. You will then be asked to supply your Bugzilla credentials, which will then be used to communicate with the Bugzilla REST API over https, and make the specified changes.
+</p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/06/mcMerge_submit.png"><img class="size-medium wp-image-91" title="mcMerge_submit" src="http://www.graememcc.co.uk/wp-content/uploads/2012/06/mcMerge_submit-300x19.png" alt="" width="300" height="19" /></a>
+  <figcaption>The submit button reverts the tree to Firefox 3.5. Or something.</figcaption>
+</figure>
+<h2>Backouts</h2>
+<p>
+The creativity in commit messages reaches whole new levels when it gets to backouts (pro-tip: flick to the pushes backed out section to check for any misdetections before submitting any fixes). Where possible, m-cMerge will associate the pushes backed out with the thing that backed them out.
+</p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/06/Screenshot-1.png"><img class="size-medium wp-image-79" title="Screenshot-1" src="http://www.graememcc.co.uk/wp-content/uploads/2012/06/Screenshot-1-300x160.png" alt="" width="300" height="160" /></a>
+  <figcaption>Pushes backed out are associated with the thing that backed them out.</figcaption>
+</figure>
+<p>
+Both backouts and the pushes backed out default to neither commenting or resolving, but that can of course be changed via the controls provided. As seen in the picture above, m-cMerge can cope with a push that backs out multiple other pushes. Indeed, it should cope with ranged backouts e.g. 'backout aaabbbcccddd-111222333444' or 'backout aaabbbcccddd through 111222333444' , and 'backout aaabbbcccddd : 111222333444'. When you messy pups really hose the tree, it can deal with 'revert tree to changeset aaabbbcccddd'. For normal backouts, it understands 'revert' is a synonym for 'backout'.
+</p>
+<p>
+m-cMerge's backout detection really is only as good as the commit messages. I would encourage the use of changeset hashes in the backout commit message to specify exactly what was removed.
+<h2>Summary</h2>
+After all the individual sections, m-cMerge provides a handy summary of the damage unleashed on Bugzilla.
+</p>
+<figure>
+<a href="http://www.graememcc.co.uk/wp-content/uploads/2012/06/Screenshot-3.png"><img class="size-medium wp-image-80" title="Screenshot-3" src="http://www.graememcc.co.uk/wp-content/uploads/2012/06/Screenshot-3-300x143.png" alt="" width="300" height="143" /></a>
+  <figcaption>The summary shows what changes were submitted</figcaption>
+</figure>
+<p>
+If it looks like you forgot to submit, m-cMerge will issue a warning.
+</p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/06/Screenshot-13.png"><img class="size-medium wp-image-81" title="Screenshot-13" src="http://www.graememcc.co.uk/wp-content/uploads/2012/06/Screenshot-13-300x108.png" alt="" width="300" height="108" /></a>
+  <figcaption>Red text! Looks like we have some kind of warning.</figcaption>
+</figure>
+<p>
+It will also nag you about your part of the deal: resolving security bugs.
+</p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/06/Screenshot-14.png"><img class="size-medium wp-image-82" title="Screenshot-14" src="http://www.graememcc.co.uk/wp-content/uploads/2012/06/Screenshot-14-300x54.png" alt="" width="300" height="54" /></a>
+  <figcaption>Don't forget the security bugs</figcaption>
+</figure>
+<h2>Patches welcome</h2>
+<p>
+I hope this is enough to be useful to inbound sheriffs. It could be prettier though. I'm not entirely sure how best to present the information in the summary; the dialogs use an off-the-shelf jQuery theme, and don't tie in with the rest of the site. The "loading" message should stay centered on the screen when you scroll, and I thought I should just have been able to set "position: fixed;" on it - instead it defeated me until the bitter end. And of course, with all your prodding and poking, you'll likely find other bugs: on the other hand, you'll now have lots of free time to fix them, now that you're not resolving bugs all day!
+</p>
+          </div><!-- .entry-content -->
+        </article><!-- #post-## -->
+      </div><!-- #content -->
+    </div><!-- #primary -->
+  </div><!-- #main -->
+  <footer id="colophon" class="site-footer" role="contentinfo">
+  </footer><!-- #colophon -->
+  </div><!-- #page -->
+  <link rel='stylesheet' id='custom-css'  href='../../../../css/custom.css' type='text/css' media='all' />
+</html>

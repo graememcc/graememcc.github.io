@@ -41,3 +41,11 @@ header nav ul li {
   margin-top: 15px;
   margin-bottom: 15px;
 }
+
+figcaption {
+  font-family: serif;
+  font-style: italic;
+  font-size: 12px;
+  text-align: center;
+}
+

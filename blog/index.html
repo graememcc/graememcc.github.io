@@ -36,6 +36,45 @@
                           visible. Normal service will be resumed as soon as possible.</aside>
         <article class="post-20 page type-page status-publish hentry">
           <header class="entry-header">
+            <a href="http://www.graememcc.co.uk/2012/08/05/pushlog-urls-now-printed-when-pushing-to-mozilla-central"><h2>Pushlog URLs now printed when pushing to mozilla-central</h2></a>
+          </header>
+          <div class="entry-content">
+  <p>
+	When pushing to mozilla-central or mozilla-inbound, one of the first things you are likely to do post-push is copy and paste the changeset URL into the relevant bug. To help, I fixed <a title="Bug 663585" href="https://bugzilla.mozilla.org/show_bug.cgi?id=663585" target="_blank">bug 663585</a>, which has now been enabled on some of our main repositories.
+  </p>
+  <p>
+  When pushing, you should now see something like this:
+  </p>
+  <pre>graememcc@Vitalstatistix:~/moz/hghooks/fakes/mcclone$ hg push
+  pushing to /home/graememcc/moz/hghooks/fakes/mozilla-central
+  searching for changes
+  adding changesets
+  adding manifests
+  adding file changes
+  added 1 changesets with 1 changes to 1 files
+  You can view your change at the following URL:
+      https://hg.mozilla.org/mozilla-central/rev/b945bf7017be</pre>
+  </p>
+  <p>
+  If you're pushing a large number of changes, the individual URLs cease to be useful. Instead, you will see:
+  <pre>You can view the pushlog for your changes at the following URL:
+    https://hg.mozilla.org/mozilla-central/pushloghtml?changeset=4464ac64628a</pre>
+  </p>
+  <p>
+  Admittedly this won't directly, help you with marking bugs, but it's perfect for pasting into <a title="m-cMerge" href="https://paas.allizom.org/bugherder/" target="_blank">m-cMerge</a> for automating the bug commenting (m-cMerge can now handle general commits to <em>any</em> tree not just mozilla-central).
+  </p>
+  <p>
+  Finally, when pushing to Try, the results of your builds are more relevant. Hence:
+  </p>
+  <pre>You can view the progress of your build at the following URL:
+    https://tbpl.mozilla.org/?tree=Try&amp;rev=15ecf264d328</pre>
+  <p>
+  I hope you find these changes useful!
+  </p>
+          </div>
+         </article>
+        <article class="post-20 page type-page status-publish hentry">
+          <header class="entry-header">
             <a href="http://www.graememcc.co.uk/2012/06/12/introducing-m-cmerge"><h2>Introducing m-cMerge</h2></a>
           </header>
           <div class="entry-content">

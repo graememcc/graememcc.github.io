@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>more m-cMerge updates | @graememcc | Graeme McCutcheon&#039;s corner of the web</title>
+<link rel="alternate" type="application/rss+xml" title="@graememcc &raquo; Feed" href="http://www.graememcc.co.uk/feed/" />
+<link rel='stylesheet' id='syntax-style-css'  href='../../../../css/style.css' type='text/css' media='all' />
+<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="home page page-id-20 page-template-default custom-background">
+  <div id="page" class="hfeed site">
+    <header id="masthead" class="site-header" role="banner">
+      <div class="site-header-wrapper clear">
+        <div class="site-branding">
+          <h1 class="site-title"><a href="http://www.graememcc.co.uk/" title="@graememcc" rel="home">@graememcc</a></h1>
+<!--<h2 class="site-description">Graeme McCutcheon&#039;s corner of the web</h2>-->
+        </div>
+      </div>
+      <nav id="mynav">
+        <div class="site-header-wrapper align-right">
+        <ul>
+          <li><a href="https://github.com/graememcc/" target="_blank">Github</a></li>
+          <li><a href="http://www.graememcc.co.uk/projects/">Projects</a></li>
+          <li><a href="http://www.graememcc.co.uk/blog/">Blog</a></li>
+          <li><a href="http://www.graememcc.co.uk/">Home</a></li>
+        </ul>
+      </div>
+      </nav>
+    </header><!-- #masthead -->
+  <div id="main" class="site-main">
+    <div id="primary" class="content-area">
+      <div id="content" class="site-content" role="main">
+        <article id="post-20" class="post-20 page type-page status-publish hentry">
+          <header class="entry-header">
+            <h1 class="entry-title">more m-cMerge updates</h1> </header><!-- .entry-header -->
+          <div class="entry-content">
+            <aside class="update">Note: for technical reasons, this is currently a (temporary) static copy of my blog. Comments are disabled, and existing comments are not
+                              visible. Normal service will be resumed as soon as possible.</aside>
+<p>
+A couple more <a title="m-cMerge" href="http://paas.allizom.org/bugherder">m-cMerge</a> improvements have now landed.
+</p>
+<h3>Bug Assignees</h3>
+<p>
+m-cMerge will now attempt to set the bug assignee in certain circumstances. Specifically, the following must hold:
+</p>
+<ul>
+ 	<li>The current assignee for the bug is nobody@mozilla.org</li>
+ 	<li>If there is more than one changeset for a particular bug, the changeset author must be the same for each of the bug's changesets</li>
+ 	<li>The changeset author email must be a valid Bugzilla user email</li>
+</ul>
+<p>
+The summary page will highlight any bugs where the assignee was set:
+</p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/09/email.png"><img class="size-full wp-image-143" title="email" src="http://www.graememcc.co.uk/wp-content/uploads/2012/09/email.png" alt="m-cMerge summary page with email" width="1003" height="170" /></a>
+  <figcaption>When m-cMerge has set the assignee, it will highlight this</figcaption>
+</figure>
+<a name="more"></a>
+<h3>In-Testsuite Flag</h3>
+<p>
+m-cMerge has been updated to allow you to set the in-testsuite flag. Note m-cMerge doesn't make any predictions, or in any way try to automatically set the flag: this is completely manual.
+</p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/09/testsuite_flag.png"><img class="size-full wp-image-144" title="testsuite_flag" src="http://www.graememcc.co.uk/wp-content/uploads/2012/09/testsuite_flag.png" alt="The testsuite flag in the m-cMerge bug UI" width="982" height="341" /></a>
+  <figcaption>The flag has been added below the "Comment/Resolve" checkboxes</figcaption>
+</figure>
+<p>
+The flag appears next to the checkboxes for commenting/resolving a bug - provided the bug belongs to a component that supports the flag. Initially, it will show the current value of the flag.
+</p>
+<p>
+To allow you to judge whether the flag should be set, you can now view the files for a particular changeset.
+</p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/09/testsuite_files.png"><img class="size-full wp-image-145" title="testsuite_files" src="http://www.graememcc.co.uk/wp-content/uploads/2012/09/testsuite_files.png" alt="Files affected by an individual changeset" width="995" height="275" /></a>
+  <figcaption> You can view the files affected by a particular changeset</figcaption>
+</figure>
+<p>
+Simply click View/hide files to list the affected files. You can of course also click on the changeset ID to open the changeset diff on hg.mozilla.org in a new tab/window.
+</p>
+          </div><!-- .entry-content -->
+        </article><!-- #post-## -->
+      </div><!-- #content -->
+    </div><!-- #primary -->
+  </div><!-- #main -->
+  <footer id="colophon" class="site-footer" role="contentinfo">
+  </footer><!-- #colophon -->
+  </div><!-- #page -->
+  <link rel='stylesheet' id='custom-css'  href='../../../../css/custom.css' type='text/css' media='all' />
+</html>

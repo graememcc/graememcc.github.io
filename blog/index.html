@@ -36,6 +36,33 @@
                           visible. Normal service will be resumed as soon as possible.</aside>
         <article class="post-20 page type-page status-publish hentry">
           <header class="entry-header">
+            <a href="http://www.graememcc.co.uk/2012/09/21/more-m-cmerge-updates"><h2>more m-cMerge updates</h2></a>
+          </header>
+          <div class="entry-content">
+  <p>
+  A couple more <a title="m-cMerge" href="http://paas.allizom.org/bugherder">m-cMerge</a> improvements have now landed.
+  </p>
+  <h3>Bug Assignees</h3>
+  <p>
+  m-cMerge will now attempt to set the bug assignee in certain circumstances. Specifically, the following must hold:
+  </p>
+  <ul>
+   	<li>The current assignee for the bug is nobody@mozilla.org</li>
+   	<li>If there is more than one changeset for a particular bug, the changeset author must be the same for each of the bug's changesets</li>
+   	<li>The changeset author email must be a valid Bugzilla user email</li>
+  </ul>
+  <p>
+  The summary page will highlight any bugs where the assignee was set:
+  </p>
+  <figure>
+    <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/09/email.png"><img class="size-full wp-image-143" title="email" src="http://www.graememcc.co.uk/wp-content/uploads/2012/09/email.png" alt="m-cMerge summary page with email" width="1003" height="170" /></a>
+    <figcaption>When m-cMerge has set the assignee, it will highlight this</figcaption>
+  </figure>
+  <a class="more-link" href="http://www.graememcc.co.uk/2012/09/21/more-m-cmerge-updates/#more">Read more</a>
+          </div>
+         </article>
+        <article class="post-20 page type-page status-publish hentry">
+          <header class="entry-header">
             <a href="http://www.graememcc.co.uk/2012/09/14/m-cmerge-and-status-flags"><h2>m-cMerge and status flags</h2></a>
           </header>
           <div class="entry-content">

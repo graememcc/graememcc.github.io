@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Handling large backouts with m-cMerge | @graememcc | Graeme McCutcheon&#039;s corner of the web</title>
+<link rel="alternate" type="application/rss+xml" title="@graememcc &raquo; Feed" href="http://www.graememcc.co.uk/feed/" />
+<link rel='stylesheet' id='syntax-style-css'  href='../../../../css/style.css' type='text/css' media='all' />
+<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="home page page-id-20 page-template-default custom-background">
+  <div id="page" class="hfeed site">
+    <header id="masthead" class="site-header" role="banner">
+      <div class="site-header-wrapper clear">
+        <div class="site-branding">
+          <h1 class="site-title"><a href="http://www.graememcc.co.uk/" title="@graememcc" rel="home">@graememcc</a></h1>
+<!--<h2 class="site-description">Graeme McCutcheon&#039;s corner of the web</h2>-->
+        </div>
+      </div>
+      <nav id="mynav">
+        <div class="site-header-wrapper align-right">
+        <ul>
+          <li><a href="https://github.com/graememcc/" target="_blank">Github</a></li>
+          <li><a href="http://www.graememcc.co.uk/projects/">Projects</a></li>
+          <li><a href="http://www.graememcc.co.uk/blog/">Blog</a></li>
+          <li><a href="http://www.graememcc.co.uk/">Home</a></li>
+        </ul>
+      </div>
+      </nav>
+    </header><!-- #masthead -->
+  <div id="main" class="site-main">
+    <div id="primary" class="content-area">
+      <div id="content" class="site-content" role="main">
+        <article id="post-20" class="post-20 page type-page status-publish hentry">
+          <header class="entry-header">
+            <h1 class="entry-title">Handling large backouts with m-cMerge</h1> </header><!-- .entry-header -->
+          <div class="entry-content">
+            <aside class="update">Note: for technical reasons, this is currently a (temporary) static copy of my blog. Comments are disabled, and existing comments are not
+                              visible. Normal service will be resumed as soon as possible.</aside>
+  <p>
+  <a title="m-cMerge" href="http://paas.allizom.org/bugherder/" target="_blank">m-cMerge</a> has been updated regularly since it was <a title="Introducing m-cMerge" href="http://www.graememcc.co.uk/2012/06/12/introducing-m-cmerge.html" target="_blank">unveiled</a>. One recent update added the ability to handle pushes from trees other than mozilla-central. There are plenty of times where large patch series land on integration repositories such as mozilla-inbound, and marking them is as much of a chore as marking merges.
+  </p>
+  <p>
+  I've now taken this to its logical conclusion, and added the ability for m-cMerge to handle backouts as well. You often see sweeping backouts on mozilla-inbound, trying to get the tree back to a green state. Most of the time each of those bugs will be getting commented with the same information - a reason for the backout, and the rev URLs of the backout changesets. That sounds perfect for automation!
+  </p>
+  <p>
+  m-cMerge will now handle backouts in certain circumstances. Specifically, there can be no fixes landing in the same push, or a fix and its backout landing in the same push. I don't think we lose anything with these restrictions - you're unlikely to be landing new code as well as trying to clean up the tree. Equally, you're unlikely to land a fix and back it out again in the same push - the only scenario where that could happen is a merge, and the backout commenting should already have been done when the backout hit the integration repo.
+  </p>
+  <p>
+  When given a backout revision, m-cMerge will attempt to attach the relevant bugs to pushes, as normal.
+  </p>
+  <figure>
+    <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/08/Backout2.png"><img class="size-full wp-image-115" title="Backout2" src="http://www.graememcc.co.uk/wp-content/uploads/2012/08/Backout2.png" alt="" width="981" height="312" /></a>
+    <figcaption>m-cMerge will detect the bugs affected by the backout<figcaption>
+  </figure>
+  <p>
+  As always, the "Add", "Remove" and "Change" buttons allow for manual review, and correction of anything that has been misdetected.
+  </p>
+  <p>
+  If you are dealing with a mozilla-central backout, you will be offered the opportunity to reopen the bug.
+  </p>
+  <figure>
+    <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/08/backout1.png"><img class="size-full wp-image-116" title="backout1" src="http://www.graememcc.co.uk/wp-content/uploads/2012/08/backout1.png" alt="" width="1017" height="315" /></a>
+    <figcaption>RESOLVED FIXED? Let me reopen that for you.</figcaption>
+  </figure>
+  <p>
+  Note in this case the "comment" and "reopen" options are linked - you wouldn't want to reopen a bug without explanation, nor would you post the backout revisions without making the patch author aware he/she was backed out.
+  </p>
+  <p>
+  You can manually edit the comments if you wish. However, if you need to add the same backout explanation to every bug, there is another solution. When you hit submit, m-cMerge will look at all the bugs whose comment still starts with the changeset URL, and for those, it will present you with the following dialog:
+  </p>
+  <figure>
+    <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/08/Backout3.png"><img class="size-large wp-image-117" title="Backout3" src="http://www.graememcc.co.uk/wp-content/uploads/2012/08/Backout3-1024x242.png" alt="" width="580" height="137" /></a>
+    <figcaption>Adding the same explanation to multiple bugs is easy</figcaption>
+  </figure>
+  <p>
+  This will allow you to add some explanatory text prior to the changeset URL. Checking the checkbox will add the same text to any unedited bug comments that have not yet been submitted, and won't prompt you again. Leaving it unchecked will prompt you to enter text for the next bug when it is ready to be submitted. Hitting ESC or Cancel will transmit the change for this bug without any additional comment text. Leave the textarea empty and check the box to send all comments as they are.
+  </p>
+  <p>
+  As always, report any bugs in the <a title="BitBucket bug tracker" href="https://bitbucket.org/graememcc/m-cmerge/issues" target="_blank">BitBucket bug tracker</a>. I hope this proves useful.
+  </p>
+          </div><!-- .entry-content -->
+        </article><!-- #post-## -->
+      </div><!-- #content -->
+    </div><!-- #primary -->
+  </div><!-- #main -->
+  <footer id="colophon" class="site-footer" role="contentinfo">
+  </footer><!-- #colophon -->
+  </div><!-- #page -->
+  <link rel='stylesheet' id='custom-css'  href='../../../../css/custom.css' type='text/css' media='all' />
+</html>

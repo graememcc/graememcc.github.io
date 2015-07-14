@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>m-cMerge and status flags | @graememcc | Graeme McCutcheon&#039;s corner of the web</title>
+<link rel="alternate" type="application/rss+xml" title="@graememcc &raquo; Feed" href="http://www.graememcc.co.uk/feed/" />
+<link rel='stylesheet' id='syntax-style-css'  href='../../../../css/style.css' type='text/css' media='all' />
+<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="home page page-id-20 page-template-default custom-background">
+  <div id="page" class="hfeed site">
+    <header id="masthead" class="site-header" role="banner">
+      <div class="site-header-wrapper clear">
+        <div class="site-branding">
+          <h1 class="site-title"><a href="http://www.graememcc.co.uk/" title="@graememcc" rel="home">@graememcc</a></h1>
+<!--<h2 class="site-description">Graeme McCutcheon&#039;s corner of the web</h2>-->
+        </div>
+      </div>
+      <nav id="mynav">
+        <div class="site-header-wrapper align-right">
+        <ul>
+          <li><a href="https://github.com/graememcc/" target="_blank">Github</a></li>
+          <li><a href="http://www.graememcc.co.uk/projects/">Projects</a></li>
+          <li><a href="http://www.graememcc.co.uk/blog/">Blog</a></li>
+          <li><a href="http://www.graememcc.co.uk/">Home</a></li>
+        </ul>
+      </div>
+      </nav>
+    </header><!-- #masthead -->
+  <div id="main" class="site-main">
+    <div id="primary" class="content-area">
+      <div id="content" class="site-content" role="main">
+        <article id="post-20" class="post-20 page type-page status-publish hentry">
+          <header class="entry-header">
+            <h1 class="entry-title">m-cMerge and status flags</h1> </header><!-- .entry-header -->
+          <div class="entry-content">
+            <aside class="update">Note: for technical reasons, this is currently a (temporary) static copy of my blog. Comments are disabled, and existing comments are not
+                              visible. Normal service will be resumed as soon as possible.</aside>
+<p>
+For a while, <a title="m-cMerge" href="http://paas.allizom.org/bugherder/" target="_blank">m-cMerge</a> has been blundering along, ignorant of the various flags our hard-working release drivers use to track fixes across the various trains. It wasn't alone - a recent thread on <a title="dev-planning" href="https://groups.google.com/forum/?fromgroups=#!topic/mozilla.dev.planning/93ARD6nh3VU" target="_blank">dev-planning</a> showed that many developers - myself included - weren't fully aware of what was required.
+</p>
+<p>
+Well, now the rules are clear, so m-cMerge has been brought in to line.
+</p>
+<a name="more"></a>
+<p>
+As has been previously reported, m-cMerge can now handle pretty much any tree one would care to throw at it. Most of these trees are unaffected, but m-cMerge now has some more work to do for mozilla-central, -aurora, -beta, -release, and -esrN (and the equivalent comm- trees). When you give it a changeset for one of those trees, m-cMerge will calculate the correct tracking and status flags for that tree and changeset - for example, <strong>tracking-firefox18</strong> or <strong>status-thunderbird-esr10</strong>. Later, if it finds the relevant tracking flag set, then it will set the status flag when posting to the bug, where appropriate.
+</p>
+<p>
+Note this means m-cMerge is no longer purely client-side JS: there's now some server-side logic to crawl the relevant repo to find the version.
+</p>
+<p>
+So, when does m-cMerge think it appropriate? I took the view that there should be some sort of assertion of a bug fix being sent to the bug. For -aurora, -beta, -release, and -esr, this means there should be at least one comment being sent to the tracked bug. For mozilla-central and comm-central, I added the additional constraint that you must have selected to resolve the bug. (We can't rely on that constraint for the other trees, as the patches might be backports, and thus already resolved). Additionally, the status flag must be either unset or set to 'affected' - m-cMerge will refuse to change the status flag if it is set to any other value.
+</p>
+<p>
+The help text at the top of the page will be dynamically updated as you select/deselect "resolve" and "comment" checkboxes, allowing you to keep track of which bugs will have their status flag set on submission.
+</p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/09/tracking.png"><img class="size-large wp-image-132" title="tracking" src="http://www.graememcc.co.uk/wp-content/uploads/2012/09/tracking-1024x386.png" alt="" width="580" height="218" /></a>
+  <figcaption>The help text highlights relevant bugs</figcaption>
+</figure>
+<p>
+As always, I hope this is a useful change. Feel free to <a title="Report a m-cMerge bug" href="https://bitbucket.org/graememcc/m-cmerge/issues/new" target="_blank">report</a> any issues you find - thanks to edmorley for reporting this bug!  You can read about previous m-cMerge updates <a title="m-cMerge posts" href="http://www.graememcc.co.uk/2012/08/07/handling-large-backouts-with-m-cmerge" target="_blank">here</a>.
+</p>
+          </div><!-- .entry-content -->
+        </article><!-- #post-## -->
+      </div><!-- #content -->
+    </div><!-- #primary -->
+  </div><!-- #main -->
+  <footer id="colophon" class="site-footer" role="contentinfo">
+  </footer><!-- #colophon -->
+  </div><!-- #page -->
+  <link rel='stylesheet' id='custom-css'  href='../../../../css/custom.css' type='text/css' media='all' />
+</html>

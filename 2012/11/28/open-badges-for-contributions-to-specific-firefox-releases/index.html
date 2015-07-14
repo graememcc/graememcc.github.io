@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Open Badges for contributions to specific Firefox releases | @graememcc | Graeme McCutcheon&#039;s corner of the web</title>
+<link rel="alternate" type="application/rss+xml" title="@graememcc &raquo; Feed" href="http://www.graememcc.co.uk/feed/" />
+<link rel='stylesheet' id='syntax-style-css'  href='../../../../css/style.css' type='text/css' media='all' />
+<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="home page page-id-20 page-template-default custom-background">
+  <div id="page" class="hfeed site">
+    <header id="masthead" class="site-header" role="banner">
+      <div class="site-header-wrapper clear">
+        <div class="site-branding">
+          <h1 class="site-title"><a href="http://www.graememcc.co.uk/" title="@graememcc" rel="home">@graememcc</a></h1>
+<!--<h2 class="site-description">Graeme McCutcheon&#039;s corner of the web</h2>-->
+        </div>
+      </div>
+      <nav id="mynav">
+        <div class="site-header-wrapper align-right">
+        <ul>
+          <li><a href="https://github.com/graememcc/" target="_blank">Github</a></li>
+          <li><a href="http://www.graememcc.co.uk/projects/">Projects</a></li>
+          <li><a href="http://www.graememcc.co.uk/blog/">Blog</a></li>
+          <li><a href="http://www.graememcc.co.uk/">Home</a></li>
+        </ul>
+      </div>
+      </nav>
+    </header><!-- #masthead -->
+  <div id="main" class="site-main">
+    <div id="primary" class="content-area">
+      <div id="content" class="site-content" role="main">
+        <article id="post-20" class="post-20 page type-page status-publish hentry">
+          <header class="entry-header">
+            <h1 class="entry-title">Open Badges for contributions to specific Firefox releases</h1> </header><!-- .entry-header -->
+          <div class="entry-content">
+            <aside class="update">Note: for technical reasons, this is currently a (temporary) static copy of my blog. Comments are disabled, and existing comments are not
+                              visible. Normal service will be resumed as soon as possible.</aside>
+<p>
+Although I'm primarily interested in Firefox development, Mozilla is more than just Firefox and Firefox OS. There's a crazy amount of stuff happening! One interesting project is <a title="Open Badges" href="http://www.openbadges.org" target="_blank">Open Badges</a>. I'm certain this is a right idea/right time moment, given the meteoric rise of sites like <a title="Khan Academy" href="http://www.khanacademy.org/" target="_blank">Khan Academy</a>, <a title="edX" href="https://www.edx.org/" target="_blank">edX</a>, and <a title="Coursera" href="https://www.coursera.org/" target="_blank">Coursera</a> (not forgetting Mozilla's very own <a title="Webmaker" href="https://webmaker.org/" target="_blank">Webmaker</a> project), all offering the opportunity for learners to acquire new skills. Indeed, I participated in <a title="Udacity" href="http://www.udacity.com/" target="_blank">Udacity</a>'s first offering of CS101, to observe the mechanics of online learning. (Fortunately I obtained highest distinction - anything else may have triggered a mini-existential crisis!). In fact, I went on to take CS212 Design of Computer Programs (because Peter Norvig!) and CS262 Programming Languages (featuring several Mozillians). Course awards take the form of a downloadable PDF certificate - useful in the offline world for emails and CVs perhaps, but what about online? The ability to showcase your skills online via evidence-based badges is a powerful one.
+</p>
+<p>
+Separately there is an ongoing focus within Mozilla to <a title="Grow Mozilla" href="https://wiki.mozilla.org/Grow" target="_blank">grow</a> the Mozilla community and increase the number of contributors to all areas of the project. As a volunteer contributor, this is close to my heart. It may be one of the most important efforts underway within Mozilla. The <a title="Coding Contribute group" href="https://wiki.mozilla.org/Contribute/Coding" target="_blank">coding contribute group</a> are wrestling with how to attract, retain and reward coders to the various Mozilla software products. One area of focus is tracking contributors as they reach important milestones in their Mozilla career, and issuing rewards for certain milestones. Open badges have been raised in that context, as a potential reward for certain milestones.
+</p>
+<a name="more"></a>
+<h2>Badges for releases</h2>
+<p>
+Aside from individual accomplishments, we hit an important milestone every 6 weeks: a new version of Firefox is released to the world, containing hundreds of patches submitted by contributors in the previous 18 weeks. When your code reaches millions of Firefox users...well, that's an achievement. That is surely something worth celebrating. Why not issue a badge to anyone who contributed new code to a particular release? By waiting until the release is out the door, we can capture all relevant contributions, rather than trying to measure a moving target like Aurora and Beta. Such a badge could have real value, particularly if backed by evidence - currently if a third-party wants proof that someone contributed, the unattractive options available to them are grepping "hg log" or learning to query Bugzilla. A per-release badge might even be a subtle tool for contributor retention - contributors might aim to earn a badge for every release. Gotta catch 'em all!
+</p>
+<p>
+Assessing whether someone has earned a badge for a particular release should be trivial. It's simply a Bugzilla query - though we need to make sure it's the <em>right</em> query. This made me curious about the badge issuing process; I was pleased to find it fairly straightforward. In fact, I was quickly able to put together a simple proof of concept, a simple site that will issue a badge to anyone who contributed new code to Firefox 17, with the caveat that the earner will be mightly disappointed when faced with my terrible badge-drawing skills!
+</p>
+<h2>Proof of concept</h2>
+<p>
+To receive a badge for Firefox 17 contributions, visit <a title="Badger" href="http://www.graememcc.co.uk/badger/" target="_blank">graememcc.co.uk/badger</a> and enter your bugmail.
+</p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/11/badger1.png"><img class="size-full wp-image-158" title="badger1" src="http://www.graememcc.co.uk/wp-content/uploads/2012/11/badger1.png" alt="Screenshot of the bugmail entry form" width="971" height="230" /></a>
+  <figcaption>Enter the email address used on bugzilla.mozilla.org</figcaption>
+</figure>
+<p>
+The site then queries Bugzilla, querying if you landed code within the relevant timeframe. The specific criteria are:
+</p>
+<ul>
+	<li>Assignee == supplied bugmail</li>
+	<li>Resolution == FIXED</li>
+	<li>One of:
+  <ul>
+  	<li>Target Milestone == Firefox 17</li>
+  	<li>Target Milestone == mozilla17</li>
+  	<li>status-firefox17 == fixed</li>
+  </ul>
+  </li>
+</ul>
+<p>
+If this search finds qualifying bugs, you will be sent to the badge page, complete with awful badge artwork (patches welcome!):
+</p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/11/badger2.png"><img class="size-full wp-image-161" title="badger2" src="http://www.graememcc.co.uk/wp-content/uploads/2012/11/badger2.png" alt="An example badge" width="806" height="451" /></a>
+  <figcaption>A badge is issued - if you earned it! (Note, the badge issued now is actually for Firefox 17 contributions)</figcaption>
+</figure>
+<p>
+The button below the badge allows you to add it to your <a title="Mozilla Open Badge backpack" href="http://beta.openbadges.org" target="_blank">Open Badge backpack</a>, by signing in to their backpack via Persona, and creating a backpack if necessary. The Open Badges <a title="Issuer API" href="https://github.com/mozilla/openbadges/wiki/Issuer-API" target="_blank">Issuer API</a> takes care of these steps. If you view the badge in your backpack, you can see the associated metadata:
+</p>
+<figure>
+  <a href="http://www.graememcc.co.uk/wp-content/uploads/2012/11/badger3.png"><img class="size-full wp-image-163" title="badger3" src="http://www.graememcc.co.uk/wp-content/uploads/2012/11/badger3.png" alt="Screenshot of the badge viewed on beta.openbadges.org" width="992" height="647" /></a>
+  <figcaption>Viewing the badge on beta.openbadges.org. Note the evidence field.</figcaption>
+</figure>
+<p>
+An Open Badge assertion contains various pieces of metadata associated with the badge. The most interesting field, the one which gives badges real practical value, is "evidence". This allows the badge issuer to attach proof that the badge earner has acquired the knowledge or participated in a way that merits a particular badge. Given access to this badge is judged on Bugzilla data, it makes sense to present this data as the evidence. The assertion for your badge is a URL for a Bugzilla query to list all your code contributions to Firefox 17.
+</p>
+<p>
+Again, note this is just a proof of concept; the badge will expire 28 days after it is issued.
+</p>
+<p>
+Users that didn't earn a badge, are directed to a page suggesting they visit <a title="What can I do for Mozilla?" href="http://www.whatcanidoformozilla.org" target="_blank">whatcanidoformozilla.org</a> to get started!
+<h2>Feedback</h2>
+<p>
+I hope you'll give <a title="Badger" href="http://www.graememcc.co.uk/badger/" target="_blank">Badger</a> a quick spin - and I hope you earned a badge! Remember, this isn't an official Mozilla badge - such a badge would be far, far prettier for starters - however, the evidence in your badge backpack will speak for itself. I'm particularly interested to here from anyone who did contribute code to Firefox 17 yet doesn't receive a badge. The search criteria above should be sufficient, however I definitely want to know if they need refining. I would love to hear people's opinions as to whether this is something worth exploring further.
+</p>
+<p>
+The code is on github: <a title="Badger on github" href="https://github.com/graememcc/badger" target="_blank">https://github.com/graememcc/badger</a>
+</p>
+          </div><!-- .entry-content -->
+        </article><!-- #post-## -->
+      </div><!-- #content -->
+    </div><!-- #primary -->
+  </div><!-- #main -->
+  <footer id="colophon" class="site-footer" role="contentinfo">
+  </footer><!-- #colophon -->
+  </div><!-- #page -->
+  <link rel='stylesheet' id='custom-css'  href='../../../../css/custom.css' type='text/css' media='all' />
+</html>

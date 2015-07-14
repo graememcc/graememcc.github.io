@@ -38,4 +38,6 @@ header nav ul li {
   line-height: 25px;
   border: 1px dotted red;
   text-align: justify;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }

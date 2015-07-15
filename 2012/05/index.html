@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Blog: May 2012 | @graememcc | Graeme McCutcheon&#039;s corner of the web</title>
+<link rel="alternate" type="application/rss+xml" title="@graememcc &raquo; Feed" href="http://www.graememcc.co.uk/feed/" />
+<link rel='stylesheet' id='syntax-style-css'  href='../../css/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='custom-css'  href='../../css/custom.css' type='text/css' media='all' />
+<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="home page page-id-20 page-template-default custom-background">
+  <div id="page" class="hfeed site">
+    <header id="masthead" class="site-header" role="banner">
+      <div class="site-header-wrapper clear">
+        <div class="site-branding">
+          <h1 class="site-title"><a href="http://www.graememcc.co.uk/" title="@graememcc" rel="home">@graememcc</a></h1>
+<!--<h2 class="site-description">Graeme McCutcheon&#039;s corner of the web</h2>-->
+        </div>
+      </div>
+      <nav id="mynav">
+        <div class="site-header-wrapper align-right">
+        <ul>
+          <li><a href="https://github.com/graememcc/" target="_blank">Github</a></li>
+          <li><a href="http://www.graememcc.co.uk/CV.pdf" target="_blank">CV</a></li>
+          <li><a href="http://www.graememcc.co.uk/projects/">Projects</a></li>
+          <li><a href="http://www.graememcc.co.uk/blog/">Blog</a></li>
+          <li><a href="http://www.graememcc.co.uk/">Home</a></li>
+        </ul>
+      </div>
+      </nav>
+    </header><!-- #masthead -->
+  <div id="main" class="site-main">
+    <div id="primary" class="content-area">
+      <div id="content" class="site-content" role="main">
+        <aside class="update">Note: for technical reasons, this is currently a (temporary) static copy of my blog. Comments are disabled, and existing comments are not
+                          visible. Normal service will be resumed as soon as possible.</aside>
+        <header class="entryheader blogheader"><h1>Blog: May 2012</h1></header>
+        <article class="post-20 page type-page status-publish hentry">
+          <header class="entry-header">
+            <h2><a href="http://www.graememcc.co.uk/2012/05/17/trust-in-mozilla">Trust in Mozilla</a></h2>
+          </header>
+          <div class="entry-content">
+<p class="published">Published <time datetime="2012-05-17">17 May 2012</time></p>
+  <p>
+  I'm still working on something to assist those merging to mozilla-central.  I'm almost ready to start talking to Bugzilla.  Obviously, one can't test on <a title="b.m.o" href="https://bugzilla.mozilla.org" target="_blank">b.m.o</a>, so off to the test server - Landfill - we go. Now, I'll need to handle security bugs, and users who may or may not be able to modify them. I emailed <a title="Gerv" href="http://blog.gerv.net/">Gerv</a>, to see if it would be possible to emulate the b.m.o. security bug configuration in the bzapi sandbox. His reply? Sure you can, and have some admin privileges so you can set things up as you wish.
+  </p>
+  <a class="more-link" href="http://www.graememcc.co.uk/2012/05/17/trust-in-mozilla/#more">Read more</a>
+          </div>
+        </article>
+        <article class="post-20 page type-page status-publish hentry">
+          <header class="entry-header">
+            <h2><a href="http://www.graememcc.co.uk/2012/05/03/current-status">Current status</a></h2>
+          </header>
+          <div class="entry-content">
+<p class="published">Published <time datetime="2012-05-03">3 May 2012</time></p>
+  <p>
+  I've been reminded that I've not been poor at updating the blog. Mea culpa. Anyway, some recent fixes of note:
+  </p>
+  <ul><li>Bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=686203">686203</a> - Focused contenteditable can prevent other elements from getting focused on right-click, which also fixed bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=578771">578771</a> and possibly more!</li>
+  <li>Bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=740784">740784</a> - Undo (Ctrl+z) in textarea adding a newline (\\n) to the text</li>
+  <li>Bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=747163">747163</a> - TelemetryHistogramType returns failure for HISTOGRAM_FLAG</li>
+  <li>Bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=747379">747379</a> - Cloning a flag histogram with Telemetry::HistogramFrom breaks the "only one count" invariant</li>
+  </ul>
+  <a class="more-link" href="http://www.graememcc.co.uk/2012/05/03/current-status/#more">Read more</a>
+          </div>
+        </article>
+      </div><!-- #content -->
+    </div><!-- #primary -->
+  </div><!-- #main -->
+  <footer id="colophon" class="site-footer" role="contentinfo">
+  </footer><!-- #colophon -->
+  </div><!-- #page -->
+</html>

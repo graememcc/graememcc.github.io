@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Blog: 5 August 2012 | @graememcc | Graeme McCutcheon&#039;s corner of the web</title>
+<link rel="alternate" type="application/rss+xml" title="@graememcc &raquo; Feed" href="http://www.graememcc.co.uk/feed/" />
+<link rel='stylesheet' id='syntax-style-css'  href='../../../css/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='custom-css'  href='../../../css/custom.css' type='text/css' media='all' />
+<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="home page page-id-20 page-template-default custom-background">
+  <div id="page" class="hfeed site">
+    <header id="masthead" class="site-header" role="banner">
+      <div class="site-header-wrapper clear">
+        <div class="site-branding">
+          <h1 class="site-title"><a href="http://www.graememcc.co.uk/" title="@graememcc" rel="home">@graememcc</a></h1>
+<!--<h2 class="site-description">Graeme McCutcheon&#039;s corner of the web</h2>-->
+        </div>
+      </div>
+      <nav id="mynav">
+        <div class="site-header-wrapper align-right">
+        <ul>
+          <li><a href="https://github.com/graememcc/" target="_blank">Github</a></li>
+          <li><a href="http://www.graememcc.co.uk/CV.pdf" target="_blank">CV</a></li>
+          <li><a href="http://www.graememcc.co.uk/projects/">Projects</a></li>
+          <li><a href="http://www.graememcc.co.uk/blog/">Blog</a></li>
+          <li><a href="http://www.graememcc.co.uk/">Home</a></li>
+        </ul>
+      </div>
+      </nav>
+    </header><!-- #masthead -->
+  <div id="main" class="site-main">
+    <div id="primary" class="content-area">
+      <div id="content" class="site-content" role="main">
+        <aside class="update">Note: for technical reasons, this is currently a (temporary) static copy of my blog. Comments are disabled, and existing comments are not
+                          visible. Normal service will be resumed as soon as possible.</aside>
+        <header class="entryheader blogheader"><h1>Blog: 5 August 2012</h1></header>
+        <article class="post-20 page type-page status-publish hentry">
+          <header class="entry-header">
+            <h2><a href="http://www.graememcc.co.uk/2012/08/05/pushlog-urls-now-printed-when-pushing-to-mozilla-central">Pushlog URLs now printed when pushing to mozilla-central</a></h2>
+          </header>
+          <div class="entry-content">
+<p class="published">Published <time datetime="2012-08-05">5 August 2012</time></p>
+  <p>
+	When pushing to mozilla-central or mozilla-inbound, one of the first things you are likely to do post-push is copy and paste the changeset URL into the relevant bug. To help, I fixed <a title="Bug 663585" href="https://bugzilla.mozilla.org/show_bug.cgi?id=663585" target="_blank">bug 663585</a>, which has now been enabled on some of our main repositories.
+  </p>
+  <p>
+  When pushing, you should now see something like this:
+  </p>
+  <pre>graememcc@Vitalstatistix:~/moz/hghooks/fakes/mcclone$ hg push
+  pushing to /home/graememcc/moz/hghooks/fakes/mozilla-central
+  searching for changes
+  adding changesets
+  adding manifests
+  adding file changes
+  added 1 changesets with 1 changes to 1 files
+  You can view your change at the following URL:
+      https://hg.mozilla.org/mozilla-central/rev/b945bf7017be</pre>
+  </p>
+  <p>
+  If you're pushing a large number of changes, the individual URLs cease to be useful. Instead, you will see:
+  <pre>You can view the pushlog for your changes at the following URL:
+    https://hg.mozilla.org/mozilla-central/pushloghtml?changeset=4464ac64628a</pre>
+  </p>
+  <p>
+  Admittedly this won't directly, help you with marking bugs, but it's perfect for pasting into <a title="m-cMerge" href="https://paas.allizom.org/bugherder/" target="_blank">m-cMerge</a> for automating the bug commenting (m-cMerge can now handle general commits to <em>any</em> tree not just mozilla-central).
+  </p>
+  <p>
+  Finally, when pushing to Try, the results of your builds are more relevant. Hence:
+  </p>
+  <pre>You can view the progress of your build at the following URL:
+    https://tbpl.mozilla.org/?tree=Try&amp;rev=15ecf264d328</pre>
+  <p>
+  I hope you find these changes useful!
+  </p>
+          </div>
+         </article>
+      </div><!-- #content -->
+    </div><!-- #primary -->
+  </div><!-- #main -->
+  <footer id="colophon" class="site-footer" role="contentinfo">
+  </footer><!-- #colophon -->
+  </div><!-- #page -->
+</html>
